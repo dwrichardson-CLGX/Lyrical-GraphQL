@@ -12,3 +12,5 @@ const ClientSchema = new Schema({
 
 
 });
+
+mongoose.model('client', ClientSchema);

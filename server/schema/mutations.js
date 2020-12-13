@@ -1,10 +1,15 @@
 const graphql = require('graphql');
-const { GraphQLObjectType, GraphQLString, GraphQLID } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLBoolean } = graphql;
 const mongoose = require('mongoose');
 const Song = mongoose.model('song');
 const Lyric = mongoose.model('lyric');
+const Product = mongoose.model('product');
+
+
 const SongType = require('./song_type');
 const LyricType = require('./lyric_type');
+const ProductType = require('./product_type');
+
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -43,7 +48,23 @@ const mutation = new GraphQLObjectType({
       resolve(parentValue, { id }) {
         return Song.remove({ _id: id });
       }
+    },
+    addProduct:{
+      type: ProductType,
+      args: {
+        ProductName: {type: GraphQLString},
+        Links: {type: GraphQLString},
+        Description: { type: GraphQLString},
+        ContactName: { type: GraphQLString},
+        ContactEmail: { type: GraphQLString},
+        ContactPhone : { type: GraphQLString},
+        IsFlagged: { type: GraphQLBoolean}
+      },
+      resolve(parentValue,{ ProductName, Links, Description, ContactName,ContactEmail,ContactPhone, IsFlagged}){
+        return (new Product({ ProductName: ProductName, Links: Links, Description: Description, ContactName: ContactName, ContactEmail: ContactEmail, ContactPhone: ContactPhone, IsFlagged: IsFlagged})).save();
+      }
     }
+  
   }
 });
 

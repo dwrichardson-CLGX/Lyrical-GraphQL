@@ -2,28 +2,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema({
+    ProductName: {type: String },
     Description: { type:  String },
     Links: String,
-    Contact: { name:String, email: String, tel: String },
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'user'
-    } 
+    ContactName:  { type:String },
+    ContactEmail: { type: String },
+    ContactPhone: { type: String },
+    IsFlagged: { type: Boolean }
+   
   }, {usePushEach: true});
 
 
-  ProductSchema.static.addContact = function(id, name, email, tel){
-    const Contact = mongoose.model('user');
-
-    return this.findById(id)
-      .then(product => {
-        const contact = new Contact({name, email, tel })
-        product.Contact = contact;
-        return Promise.all([contact.save(), product.save()])
-          .then(([contact,  product]) => product);
-      });
-
-  }
 
   mongoose.model('product', ProductSchema);
 
