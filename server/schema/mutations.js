@@ -5,12 +5,15 @@ const Song = mongoose.model('song');
 const Lyric = mongoose.model('lyric');
 const Product = mongoose.model('product');
 const Client = mongoose.model('client');
+const Contact = mongoose.model('contact');
 
 const SongType = require('./song_type');
 const LyricType = require('./lyric_type');
 const ProductType = require('./product_type');
 const ClientType = require('./client_type');
+const ContactType = require('./contact_type');
 
+var Schema = mongoose.Schema; 
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -65,22 +68,43 @@ const mutation = new GraphQLObjectType({
         return (new Product({ ProductName: ProductName, Links: Links, Description: Description, ContactName: ContactName, ContactEmail: ContactEmail, ContactPhone: ContactPhone, IsFlagged: IsFlagged})).save();
       }
     },
+    addContact:{
+        type:
+          ContactType,
+          args:{
+            Name: { type: GraphQLString },
+            Email: { type: GraphQLString },
+            Phone: { type: GraphQLString },
+            InternalContact: { type: GraphQLString },
+            InternalEmail: { type: GraphQLString }
+          },
+          resolve(parentValue,{ Name, Email, Phone, InternalContact, InternalEmail}){
+            return (new Contact({ Name, Email, Phone, InternalContact, InternalEmail })).save();
+          }
+        
+    },
     addClient:{
       type: ClientType,
       args:{
         Name: {type: GraphQLString},
         PrimaryPlatform: { type: GraphQLString},
+        PrimaryContact: { type: GraphQLString },
         ProductIds: { type : new GraphQLList(GraphQLID) },
         Products: { type : new GraphQLList(GraphQLID) }
 
       },
       resolve(parentValue, args){
-        var product = Product.findById({_id: "5fd6552df36d13f0c28211d1"});
-                        
+        console.log(args);
+        var ObjectId =  Schema.ObjectId;
+        var id = new ObjectId("5fd6552df36d13f0c28211d1");
+        var product = Product.findById(id);
+        console.log(product.lean());       
+        console.log(product.lean().model());
         var client = new Client();
-        client.Products.push(product);
-        client.Name = args.name;
+       // client.Products.push(product);
+        client.Name = args.Name;
         client.PrimaryPlatform = args.PrimaryPlatform;
+        client.PrimaryContact = args.PrimaryContact;
         return client.save();
 
 /*

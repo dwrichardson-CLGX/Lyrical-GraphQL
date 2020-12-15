@@ -31,31 +31,31 @@ const ProductType = new GraphQLObjectType({
    })
 });
 
-const ClientType = new GraphQLObjectType({
-  name: 'ClientType',
-  fields: () =>({
-      id: { type: GraphQLID},
-      name: { type: GraphQLString },
-      products:{
-        type: new GraphQLList(ProductType),
-        resolve(parentValue) {
-            Song.find()
-        }
-      }
+// const ClientType = new GraphQLObjectType({
+//   name: 'ClientType',
+//   fields: () =>({
+//       id: { type: GraphQLID},
+//       name: { type: GraphQLString },
+//       products:{
+//         type: new GraphQLList(ProductType),
+//         resolve(parentValue) {
+//             Song.find()
+//         }
+//       }
       
-  })
-})
+//   })
+// })
 
 
-const ContactType = new GraphQLObjectType({
-  name: 'ContactType',
-  fields: () =>({
-      id: { type: GraphQLID},
-      name: { type: GraphQLString },
-      email : { type: GraphQLString },
-      phone: { type: GraphQLString }
+// const ContactType = new GraphQLObjectType({
+//   name: 'ContactType',
+//   fields: () =>({
+//       id: { type: GraphQLID},
+//       name: { type: GraphQLString },
+//       email : { type: GraphQLString },
+//       phone: { type: GraphQLString }
       
-  })
-})
+//   })
+// })
 
 module.exports = SongType;

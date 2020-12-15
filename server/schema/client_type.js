@@ -10,6 +10,7 @@ const ClientType = new GraphQLObjectType({
         id: { type: GraphQLID},
         Name: { type: GraphQLString },
         PrimaryPlatform: {type: GraphQLString },
+        PrimaryContact: { type: GraphQLString },
         ProductIds: { type : new GraphQLList(GraphQLID)},
         Products:{
           type: new GraphQLList(ProductType),

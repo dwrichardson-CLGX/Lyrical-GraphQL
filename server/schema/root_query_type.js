@@ -1,15 +1,23 @@
 const mongoose = require('mongoose');
 const graphql = require('graphql');
 const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull,GraphQLBoolean } = graphql;
+
+const ContactType = require('./contact_type');
 const SongType = require('./song_type');
 const LyricType = require('./lyric_type');
+
+
+//
+
 const ClientType = require('./client_type');
 const ProductType = require('./product_type');
 
+//
 const Lyric = mongoose.model('lyric');
 const Song = mongoose.model('song');
 const Client = mongoose.model('client');
 const Product = mongoose.model('product');
+const Contact = mongoose.model('contact');
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -46,7 +54,13 @@ const RootQuery = new GraphQLObjectType({
           return Client.find({});
         }
     },
+    contacts:{
+      type: new GraphQLList(ContactType),
+      resolve(){
+         return Contact.find({});
+      }
 
+    },
     findFlaggedProducts: {
       type: new GraphQLList(ProductType),
       args:{ isFlagged: {type: GraphQLBoolean} },
@@ -62,6 +76,13 @@ const RootQuery = new GraphQLObjectType({
         return Client.findProducts(clientId);
       }
     }
+    // ,
+    // findContacts:{
+    //   type: new GraphQLList(ContactType),
+    //   resolve(parentValue){
+    //     return Contact.find({});
+    //   }
+    // }
     
     
   })

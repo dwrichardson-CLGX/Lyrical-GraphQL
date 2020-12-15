@@ -7,6 +7,10 @@ import SongList from './components/SongList';
 import App from './components/App';
 import SongCreate from './components/SongCreate';
 import SongDetail from './components/SongDetail';
+import AdminManagement from './components/AdminManagement';
+import Support from './components/Support';
+import ClientList from './components/ClientList';
+
 
 import { Router, Route, hashHistory, IndexRoute } from "react-router";
 
@@ -22,6 +26,9 @@ const Root = () => {
               <IndexRoute component={SongList} />
               <Route path="songs/new" component={SongCreate} /> 
               <Route path="songs/:id" component={SongDetail} />
+              <Route path="manage" component={AdminManagement} />
+              <Route path="support"  component={Support}  />
+              <Route path="clients" component={ClientList} />
           </Route>
        </Router>
     </ApolloProvider>

@@ -18,13 +18,3 @@ const ProductSchema = new Schema({
   mongoose.model('product', ProductSchema);
 
 
-//   const Lyric = mongoose.model('lyric');
-
-//   return this.findById(id)
-//     .then(song => {
-//       const lyric = new Lyric({ content, song })
-//       song.lyrics.push(lyric)
-//       return Promise.all([lyric.save(), song.save()])
-//         .then(([lyric, song]) => song);
-//     });
-

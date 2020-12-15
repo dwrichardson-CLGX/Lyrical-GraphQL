@@ -1,15 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router';
+
 
 export default ({children}) => {
     return (
         <div>
-       <nav>
+       <nav className="nav-extended">
         <div className="nav-wrapper">
        <a href="#" className="brand-logo">Logo</a>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
+            <div>
+                <li><Link to="/"  >Search </Link></li>
+                <li><Link to="/clients"  >Client List </Link></li>
+                <li><Link to="/support"> Support Numbers</Link></li>
+                <li><Link to="/manage" > Manage </Link></li>
+            </div> 
+            
         </ul>
         </div> 
     </nav>   

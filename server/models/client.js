@@ -5,6 +5,7 @@ const products = require('./product')
 const ClientSchema = new Schema({
     Name: String,
     PrimaryPlatform: String,
+    PrimaryContact: String,
     ProductIds: [{type: String}],
     Products: [{
         type: Schema.Types.ObjectId,
