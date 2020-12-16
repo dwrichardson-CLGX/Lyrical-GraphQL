@@ -90,6 +90,13 @@ const RootQuery = new GraphQLObjectType({
           return Product.find({ ProductType:ProductType });
       }
     },
+    findProductById: {
+      type: new GraphQLList(ProductType),
+      args: { id : { type: GraphQLID}},
+      resolve(parentValue, { id }){
+        return Product.findById({id: id});
+      }
+    },
      
     
     findProductsByClient:{

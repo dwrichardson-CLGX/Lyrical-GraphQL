@@ -35,10 +35,11 @@ mutation addProduct(
     }
 
 `;
-
-const getProduct = gql ` 
-query getProducts {
-    products{
+ 
+const getProductById = gql ` 
+query getProducts($id: ID) {
+    findProductById(id: $id) {
+        id
       ProductName
       Description
       ProductType
@@ -97,28 +98,19 @@ class EditProduct extends Component{
     {
         if(this.props.data.loading) { return (<div><h1>Loading</h1></div>)};
  
+        console.log(this.props.data);
         let optionItems = [];
             return(
                 <div className="container"> 
                 <form className="col s12" onSubmit={this.onSubmit.bind(this)}>
            
                    <div className="row">
-                       {/* <div className="browser-default input-field col s6">
-                       <select>
-                           <option value="0" >Choose your option</option>
-                           <option value="1">Option 1</option>
-                           <option value="2">Option 2</option>
-                           <option value="3">Option 3</option>
-                           </select>
-                           <label>Materialize Select</label>
-                       </div> */}
-                       
                        <div className="row">
                            <div className="col s12">
                                <div className="input-field col s4">
                                    <input placeholder="Product/Integration Name" id="pintname" type="text" className="validate" 
                                            onChange={event => this.setState({ ProductName: event.target.value })}
-                                           defaultValue={this.props.data.product.ProductName}
+                                           defaultValue={this.props.data.products.ProductName}
                                            ref={input => this.__productName = input}
                                        ></input>
                                        <label htmlFor="pintname" className="active">Product/Integration Name</label>
@@ -156,7 +148,7 @@ class EditProduct extends Component{
 
                                <textarea id="textarea1" className="materialize-textarea" 
                                onChange={event => this.setState({ Description: event.target.value })}
-                               defaultValue={this.props.data.product.Description}
+                               defaultValue={this.props.data.products.Description}
                                ref={input => this._description = input}
                                ></textarea>
                                <label className="active">Description</label>
@@ -169,7 +161,7 @@ class EditProduct extends Component{
                            <div className="input-field col s4">
                                <input placeholder="Product Owner Name" id="PON" type="text" className="validate" 
                                    onChange={event => this.setState({ ContactName: event.target.value })}
-                                   defaultValue={this.props.data.product.ContactName}
+                                   defaultValue={this.props.data.products.ContactName}
                                    ref={input => this._contactName = input}
                                ></input>
                                <label htmlFor="PON" className="active">Product Owner Name</label>
@@ -178,7 +170,7 @@ class EditProduct extends Component{
                                <input placeholder="Product Owner Email" id="CCE" type="text" 
                                className="validate" onChange={event => 
                                    this.setState({ ContactEmail: event.target.value })}
-                                   defaultValue = {this.props.data.product.ContactEmail}
+                                   defaultValue = {this.props.data.products.ContactEmail}
                                    ref={input => this._contactEmail = input}
                                ></input>
                                <label htmlFor="CCE" className="active">Product Owner Email</label>
@@ -187,7 +179,7 @@ class EditProduct extends Component{
                            <input placeholder="Product Owner Phone" id="POP" type="text" 
                            className="validate" onChange={event =>
                                 this.setState({ ContactPhone: event.target.value })}
-                               defaultValue = {this.props.data.product.ContactPhone}
+                               defaultValue = {this.props.data.products.ContactPhone}
                                ref={input => this._contactPhone = input}
                            ></input>
                            <label htmlFor="POP" className="active">Product Owner Phone</label>
@@ -199,7 +191,7 @@ class EditProduct extends Component{
                      <div className="input-field col s12">
                             <input placeholder="Documentation Link" id="docLink" className="validate"
                               ref={input => this._links = input}
-                             defaultValue={this.props.data.product.Links}
+                             defaultValue={this.props.data.products.Links}
                               onChange={event => this.setState({ Links: event.target.value})} />
                             <label htmlFor="docLink" className="active">Documentation Link</label>
                      </div>
@@ -209,7 +201,7 @@ class EditProduct extends Component{
 
                                <textarea id="textarea1" className="materialize-textarea" 
                                 ref={input => this._productNotes = input}
-                               defaultValue={this.props.data.product.ProductNotes}
+                               defaultValue={this.props.data.products.ProductNotes}
                                onChange={event => this.setState({ ProductNotes: event.target.value })}></textarea>
                                <label className="active">Support Links</label>
                                </div>
@@ -230,7 +222,7 @@ class EditProduct extends Component{
 }
 
 
-export default graphql(addProductMutation)(graphql(getProduct,{
+export default graphql(addProductMutation)(graphql(getProductById,{
     options: (props) => { return { variables: {id: props.params.id }}}
 
 })(EditProduct));

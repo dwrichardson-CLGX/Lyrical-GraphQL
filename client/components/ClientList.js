@@ -6,6 +6,10 @@ import {Link} from 'react-router';
 class ClientList extends Component{
     constructor(props){
         super(props);
+
+        this.state= {
+            curTime : new Date().toLocaleString()
+        }
     }
 
     renderTable(){
@@ -18,7 +22,7 @@ class ClientList extends Component{
                     <td>{client.PrimaryPlatform}</td>       
                     <td>{ client.ProductIds }</td>                 
                     <td>{client.CorelogicContactName}</td>
-                    <td>{ client.ClientContactName}</td>
+                    <td>{ this.state.curTime }</td>
                     <td><Link to={`clients/${client.id}`}>
                        <i className="material-icons edit">edit</i>
                         </Link></td>

@@ -215,24 +215,25 @@ class AddClient extends Component{
 
                             <div className="row">
                                 <div className="col s4"> 
-                                <select multiple>
-                                        <option value="" disabled>Choose your Platforms</option>
-                                        <option value="1">Option 1</option>
-                                        <option value="2">Option 2</option>
-                                        <option value="3">Option 3</option>
-                                        </select>
-                                        <label>Materialize Multiple Select</label>
-
+                                <select multiple onChange={event => this.setState({ PrimaryPlatform: event.target.value})}>
+                       <option value="" disabled>Choose your Platform</option>
+                       <option value="CMS.NET">CMS.Net</option>
+                       <option value="Mercury">Mercury</option>
+                       <option value="Legacy">Legacy</option>
+                       <option value="AppraisalScope">Appraisal Scope</option>
+                       </select>
+                       <label>Materialize Multiple Select</label>
                                 </div>
                                 <div className="col s4"> 
-                                       <select multiple>
+                                       <select multiple  >
                                        <option value="" disabled>Choose your Products</option>
                                          { optionItems }
                                        </select> 
                                        <label>Products</label>
                                 </div>
                                 <div className="input-field col s4"> 
-                                <input placeholder="Client Unique Identifier" id="CLCP" type="text" className="validate" onChange={event => this.setState({ ClientIdentifier: event.target.value })}
+                                <input placeholder="Client Unique Identifier" id="CLCP" type="text" className="validate" 
+                                onChange={event => this.setState({ ClientIdentifier: event.target.value })}
                                             value = {this.state.ClientIdentifier}
                                         ></input>
                                 </div>

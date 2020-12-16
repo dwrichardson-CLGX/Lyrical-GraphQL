@@ -91,7 +91,7 @@ class EditClient extends Component{
       
     }
     render(){
-        //console.log(this.props.data);
+        console.log(this.props.data);
         if(this.props.data.loading) { return (<div><h1>Loading</h1></div>)};
  
         let optionItems = [];
@@ -201,23 +201,25 @@ class EditClient extends Component{
            <div className="row">
                <div className="col s4"> 
                <select multiple>
-                       <option value="" disabled>Choose your option</option>
-                       <option value="1">Option 1</option>
-                       <option value="2">Option 2</option>
-                       <option value="3">Option 3</option>
+                       <option value="" disabled>Choose your Platform</option>
+                       <option value="CMS.NET">CMS.Net</option>
+                       <option value="Mercury">Mercury</option>
+                       <option value="Legacy">Legacy</option>
+                       <option value="AppraisalScope">Appraisal Scopr</option>
                        </select>
                        <label>Materialize Multiple Select</label>
 
                </div>
                <div className="col s4"> 
                       <select multiple>
+                      <option value="" disabled>Choose your Products</option>
                         { optionItems }
                       </select> 
                       <label>Products</label>
                </div>
                <div className="input-field col s4"> 
                <input placeholder="Client Unique Identifier" id="CLCP" type="text" className="validate" onChange={event => this.setState({ ClientIdentifier: event.target.value })}
-                           value = {this.props.data.ClientIdentifier}
+                           defaultValue = {this.props.data.client.ClientIdentifier}
                            ref={input => this._ClientIdentifier = input}
                        ></input>
                </div>

@@ -14,7 +14,7 @@ export default ({children}) => {
             <div>
                 <li><Link to="/"  >Search </Link></li>
                 <li><Link to="/clients"  >Client List </Link></li>
-                <li><Link to="/support"> Support Numbers</Link></li>
+                <li><Link to="/support"> Support </Link></li>
                 <li><Link to="/manage" > Manage </Link></li>
             </div> 
             
