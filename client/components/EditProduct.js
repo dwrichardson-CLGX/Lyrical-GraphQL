@@ -4,8 +4,7 @@ import M from 'materialize-css';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-
-
+ 
 const addProductMutation = gql`
 mutation addProduct( 
     $ProductName: String,
@@ -36,11 +35,29 @@ mutation addProduct(
     }
 
 `;
-class AddProduct extends Component{
+
+const getProduct = gql ` 
+query getProducts {
+    products{
+      ProductName
+      Description
+      ProductType
+      ContactName 
+      ContactEmail 
+      ContactPhone  
+    }
+    
+  }
+`;
+
+
+class EditProduct extends Component{
     constructor(props){
         super(props);
 
-        this.state =  {    ProductName: "", 
+        this.state =  {    
+            
+            ProductName: "", 
             Links: "",
              Description: "",
               ContactName: "",
@@ -63,16 +80,14 @@ class AddProduct extends Component{
         this.props.mutate(
             {
                 variables:{
-                    ProductName: this.state.ProductName, 
-                    Links: this.state.Links,
-                     Description: this.state.Description ,
-                      ContactName: this.state.ContactName,
-                      ContactEmail: this.state.ContactEmail,
-                      ContactPhone: this.state.ContactPhone,
-                       IsFlagged: false, 
-                       ProductType: this.state.ProductType || 0, 
-                       ProductNotes: this.state.ProductNotes
-        
+                    ProductName: this._productName.value, 
+                    Links: this._links.value,
+                    Description: this._description.value ,
+                    ContactName: this._contactName.value,
+                    ContactEmail: this._contactEmail.value,
+                    ContactPhone: this._contactPhone.value, 
+                    ProductType: 1, 
+                    ProductNotes: this._productNotes.value 
                 }                
             }).then(() => hashHistory.push('/manage'));
 
@@ -80,7 +95,8 @@ class AddProduct extends Component{
 
     render()
     {
-
+        if(this.props.data.loading) { return (<div><h1>Loading</h1></div>)};
+ 
         let optionItems = [];
             return(
                 <div className="container"> 
@@ -102,7 +118,8 @@ class AddProduct extends Component{
                                <div className="input-field col s4">
                                    <input placeholder="Product/Integration Name" id="pintname" type="text" className="validate" 
                                            onChange={event => this.setState({ ProductName: event.target.value })}
-                                           value={this.state.ProductName}
+                                           defaultValue={this.props.data.product.ProductName}
+                                           ref={input => this.__productName = input}
                                        ></input>
                                        <label htmlFor="pintname" className="active">Product/Integration Name</label>
                                 </div>
@@ -137,7 +154,11 @@ class AddProduct extends Component{
                            <div className="col s12">
                                <div className="input-field col s12">
 
-                               <textarea id="textarea1" className="materialize-textarea" onChange={event => this.setState({ Description: event.target.value })}></textarea>
+                               <textarea id="textarea1" className="materialize-textarea" 
+                               onChange={event => this.setState({ Description: event.target.value })}
+                               defaultValue={this.props.data.product.Description}
+                               ref={input => this._description = input}
+                               ></textarea>
                                <label className="active">Description</label>
                                </div>
                            </div>
@@ -148,7 +169,8 @@ class AddProduct extends Component{
                            <div className="input-field col s4">
                                <input placeholder="Product Owner Name" id="PON" type="text" className="validate" 
                                    onChange={event => this.setState({ ContactName: event.target.value })}
-                                   value={this.state.ContactName}
+                                   defaultValue={this.props.data.product.ContactName}
+                                   ref={input => this._contactName = input}
                                ></input>
                                <label htmlFor="PON" className="active">Product Owner Name</label>
                            </div>
@@ -156,7 +178,8 @@ class AddProduct extends Component{
                                <input placeholder="Product Owner Email" id="CCE" type="text" 
                                className="validate" onChange={event => 
                                    this.setState({ ContactEmail: event.target.value })}
-                                   value = {this.state.ContactEmail}
+                                   defaultValue = {this.props.data.product.ContactEmail}
+                                   ref={input => this._contactEmail = input}
                                ></input>
                                <label htmlFor="CCE" className="active">Product Owner Email</label>
                            </div>
@@ -164,7 +187,8 @@ class AddProduct extends Component{
                            <input placeholder="Product Owner Phone" id="POP" type="text" 
                            className="validate" onChange={event =>
                                 this.setState({ ContactPhone: event.target.value })}
-                               value = {this.state.ContactPhone}
+                               defaultValue = {this.props.data.product.ContactPhone}
+                               ref={input => this._contactPhone = input}
                            ></input>
                            <label htmlFor="POP" className="active">Product Owner Phone</label>
                          </div>
@@ -173,14 +197,20 @@ class AddProduct extends Component{
                        </div> 
                     
                      <div className="input-field col s12">
-                            <input placeholder="Documentation Link" id="docLink" className="validate" value={this.state.Links} onChange={event => this.setState({ Links: event.target.value})} />
+                            <input placeholder="Documentation Link" id="docLink" className="validate"
+                              ref={input => this._links = input}
+                             defaultValue={this.props.data.product.Links}
+                              onChange={event => this.setState({ Links: event.target.value})} />
                             <label htmlFor="docLink" className="active">Documentation Link</label>
                      </div>
                       
                      <div className="col s12">
                                <div className="input-field col s12">
 
-                               <textarea id="textarea1" className="materialize-textarea" onChange={event => this.setState({ ProductNotes: event.target.value })}></textarea>
+                               <textarea id="textarea1" className="materialize-textarea" 
+                                ref={input => this._productNotes = input}
+                               defaultValue={this.props.data.product.ProductNotes}
+                               onChange={event => this.setState({ ProductNotes: event.target.value })}></textarea>
                                <label className="active">Support Links</label>
                                </div>
                      </div> 
@@ -200,4 +230,7 @@ class AddProduct extends Component{
 }
 
 
-export default graphql(addProductMutation)(AddProduct);
+export default graphql(addProductMutation)(graphql(getProduct,{
+    options: (props) => { return { variables: {id: props.params.id }}}
+
+})(EditProduct));

@@ -14,7 +14,9 @@ import AddClient from './components/AddClient';
 import EditClient from './components/EditClient';
 import AddProduct from  './components/AddProduct';
 import AddPlatform from './components/AddPlatform';
-
+import ManagePlatform from './components/ManagePlatforms';
+import ManageProduct from  './components/ManageProducts';
+import EditProduct from    './components/EditProduct';
 
 import { Router, Route, hashHistory, IndexRoute } from "react-router";
 
@@ -37,6 +39,12 @@ const Root = () => {
               <Route path="clients/:id" component={EditClient} />
                <Route path="products/new" component={AddProduct} />
                <Route path="platforms/new" component={AddPlatform} />
+               <Route path="platforms/manage" component={ManagePlatform} />
+               <Route path="products/manage" component={ManageProduct} />
+               <Route path="products/:id" component={EditProduct} />
+               {/* 
+               <Route path="platforms/:id" component={EditPlatform} /> */}
+               
           </Route>
        </Router>
     </ApolloProvider>

@@ -14,12 +14,14 @@ class ClientList extends Component{
                 return (
 
                     <tr key={client.id}>
-                        <td>{client.PrimaryPlatform}</td>                        
-                        <td>{client.CorelogicContactName}</td>
-                        <td>{ client.ClientContactName}</td>
-                        <td><Link to={`clients/${client.id}`}>
-                           <i className="material-icons edit">edit</i>
-                            </Link></td>
+                    <td>{ client.Name}</td>
+                    <td>{client.PrimaryPlatform}</td>       
+                    <td>{ client.ProductIds }</td>                 
+                    <td>{client.CorelogicContactName}</td>
+                    <td>{ client.ClientContactName}</td>
+                    <td><Link to={`clients/${client.id}`}>
+                       <i className="material-icons edit">edit</i>
+                        </Link></td>
                     </tr>
                 );
             });
@@ -34,6 +36,16 @@ class ClientList extends Component{
                 <h1>Clients</h1>
                 <div className="row">
                     <table className="table striped">
+                    <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Platform</th>
+                                <th>Integrations</th>
+                                <th>Primary Contact</th>
+                                <th>Last Update</th>
+                                <th></th>
+                            </tr>
+                        </thead>
                         <tbody>
                             { this.renderTable() }
                         </tbody>

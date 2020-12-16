@@ -216,7 +216,7 @@ class AddClient extends Component{
                             <div className="row">
                                 <div className="col s4"> 
                                 <select multiple>
-                                        <option value="" disabled>Choose your option</option>
+                                        <option value="" disabled>Choose your Platforms</option>
                                         <option value="1">Option 1</option>
                                         <option value="2">Option 2</option>
                                         <option value="3">Option 3</option>
@@ -226,7 +226,7 @@ class AddClient extends Component{
                                 </div>
                                 <div className="col s4"> 
                                        <select multiple>
-                                       <option value="" disabled>Choose your option</option>
+                                       <option value="" disabled>Choose your Products</option>
                                          { optionItems }
                                        </select> 
                                        <label>Products</label>

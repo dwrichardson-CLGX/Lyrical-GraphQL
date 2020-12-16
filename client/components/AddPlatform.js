@@ -62,7 +62,8 @@ class AddPlatform extends Component{
                       ContactPhone: this.state.ContactPhone, 
                        PlatformNotes: this.state.PlatformNotes
         
-                }                
+                },
+                refetchQueries: [{ query: query }]                
             }).then(() => hashHistory.push('/manage'));
 
     }
