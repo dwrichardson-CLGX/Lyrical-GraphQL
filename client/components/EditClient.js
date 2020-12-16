@@ -70,27 +70,25 @@ class EditClient extends Component{
 
     onSubmit(event){
         event.preventDefault(); 
-        console.log(this.state);
-        console.log(event);
-        /*
+   
         this.props.mutate(
             {
                 variables:{
-                    Name: this.state.Name,
-                    PrimaryPlatform: this.state.PrimaryPlatform,
+                    Name: this._name.value,
+                    PrimaryPlatform:  this.state.PrimaryPlatform,
                     PrimaryContact: this.state.PrimaryContact,
-                    CorelogicContactName: this.state.CorelogicContactName,
-                    CorelogicContactEmail: this.state.CorelogicContactEmail,
-                    CorelogicContactPhone: this.state.CorelogicContactPhone,
-                    ClientContactName: this.state.ClientContactName,
-                    ClientContactEmail: this.state.ClientContactEmail,
-                    ClientContactPhone: this.state.ClientContactPhone,
-                    ClientNotes: this.state.ClientNotes,
-                    ClientIdentifier: this.state.ClientIdentifier
+                    CorelogicContactName: this._CorelogicContactEmail.value,// this.state.CorelogicContactName,
+                    CorelogicContactEmail: this._CorelogicContactEmail.value,// this.state.CorelogicContactEmail,
+                    CorelogicContactPhone: this._CorelogicContactPhone.value,// this.state.CorelogicContactPhone,
+                    ClientContactName: this._ClientContactName.value, // this.state.ClientContactName,
+                    ClientContactEmail: this._ClientContactEmail.value,// this.state.ClientContactEmail,
+                    ClientContactPhone: this._ClientContactPhone.value, // this.state.ClientContactPhone,
+                    ClientNotes: this._ClientNotes.value, // this.state.ClientNotes,
+                    ClientIdentifier: this._ClientIdentifier.value // this.state.ClientIdentifier
         
                 }                
             }).then(() => hashHistory.push('/clients'));
-        */
+        
       
     }
     render(){
@@ -119,7 +117,7 @@ class EditClient extends Component{
                            <div className="input-field col s4">
                                <input placeholder="Client Name" id="title" type="text" className="validate" 
                                        onChange={event => this.setState({ Name: event.target.value })}
-                                       
+                                       ref={input => this._name = input}
                                        defaultValue={this.props.data.client.Name}
                                    ></input>
                                    <label htmlFor="title" className="active">ClientName</label>
@@ -133,7 +131,7 @@ class EditClient extends Component{
                            <input placeholder="Corelogic Contact Name" id="CCN" type="text" className="validate" 
                                onChange={event => this.setState({ CorelogicContactName: event.target.value })}
                                defaultValue={this.props.data.client.CorelogicContactName}
-                               
+                               ref={input => this._CorelogicContactName = input}
                            ></input>
                            <label htmlFor="title" className="active">Corelogic Contact Name</label>
                        </div>
@@ -141,6 +139,7 @@ class EditClient extends Component{
                            <input placeholder="Corelogic Contact Email" id="CCE" type="text" 
                            className="validate" onChange={event => 
                                this.setState({ CorelogicContactEmail: event.target.value })}
+                               ref={input => this._CorelogicContactEmail = input}
                                defaultValue = {this.props.data.client.CorelogicContactEmail}
                            ></input>
                            <label htmlFor="CCE" className="active">Corelogic Contact Email</label>
@@ -149,6 +148,7 @@ class EditClient extends Component{
                        <input placeholder="Corelogic Contact Phone" id="CCE" type="text" 
                        className="validate" onChange={event =>
                             this.setState({ CorelogicContactPhone: event.target.value })}
+                            ref={input => this._CorelogicContactPhone = input}
                             defaultValue = {this.props.data.client.CorelogicContactPhone}
                        ></input>
                        <label htmlFor="CCE" className="active">Corelogic Contact Phone</label>
@@ -162,6 +162,7 @@ class EditClient extends Component{
                        <div className="input-field col s4">
                            <input placeholder="Client Contact Name" id="CLCN" type="text" className="validate" 
                                onChange={event => this.setState({ ClientContactName: event.target.value })}
+                               ref={input => this._ClientContactName = input}
                                defaultValue={this.props.data.client.ClientContactName}
                            ></input>
                            <label htmlFor="title" className="active">Client Contact Name</label>
@@ -170,6 +171,7 @@ class EditClient extends Component{
                            <input placeholder="Client Contact Email" id="CLCE" type="text" className="validate" 
                            onChange={event => this.setState({ ClientContactEmail: event.target.value })}
                            defaultValue = {this.props.data.client.ClientContactEmail}
+                           ref={input => this._ClientContactEmail = input}
                            ></input>
                            <label htmlFor="CCE" className="active">Client Contact Email</label>
                        </div>
@@ -177,6 +179,7 @@ class EditClient extends Component{
                        <input placeholder="Client Contact Phone" id="CLCP" type="text" className="validate"
                         onChange={event => this.setState({ ClientContactPhone: event.target.value })}
                         defaultValue = {this.props.data.client.ClientContactPhone}
+                        ref={input => this._ClientContactPhone = input}
                        ></input>
                        <label htmlFor="CLCP" className="active">Client Contact Phone</label>
                      </div>
@@ -186,7 +189,9 @@ class EditClient extends Component{
                        <div className="col s12">
                            <div className="input-field col s12">
 
-                           <textarea id="textarea1" defaultValue={this.props.data.client.ClientNotes} className="materialize-textarea" onChange={event => this.setState({ ClientNotes: event.target.value })}></textarea>
+                           <textarea id="textarea1" defaultValue={this.props.data.client.ClientNotes} className="materialize-textarea" 
+                                  ref={input => this._ClientNotes = input}
+                           onChange={event => this.setState({ ClientNotes: event.target.value })}></textarea>
                            <label className="active">Client Notes</label>
                            </div>
                        </div>
@@ -214,6 +219,7 @@ class EditClient extends Component{
                <div className="input-field col s4"> 
                <input placeholder="Client Unique Identifier" id="CLCP" type="text" className="validate" onChange={event => this.setState({ ClientIdentifier: event.target.value })}
                            value = {this.props.data.ClientIdentifier}
+                           ref={input => this._ClientIdentifier = input}
                        ></input>
                </div>
            </div>
