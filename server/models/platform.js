@@ -3,7 +3,13 @@ const Schema = mongoose.Schema;
  
 
 const PlatformSchema = new Schema({
-    Name : { type: String}
+    Name : { type: String},
+    Description: { type:  String },
+    Links: { type: String},
+    ContactName:  { type:String },
+    ContactEmail: { type: String },
+    ContactPhone: { type: String }, 
+    PlatFormNotes: {type: String}
  
   }, {usePushEach: true});
  

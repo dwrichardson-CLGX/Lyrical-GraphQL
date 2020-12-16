@@ -18,7 +18,7 @@ class AdminManagement extends Component{
                             <Link to="/products/new">Add Product/Integration </Link>
                       </div>
                       <div className="col s4">
-                            <Link to="/Clients/new">Add Client</Link>
+                            <Link to="/platforms/new">Add Client</Link>
                       </div>
                   </div>
             </div>

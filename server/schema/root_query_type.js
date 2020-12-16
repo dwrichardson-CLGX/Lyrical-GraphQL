@@ -5,7 +5,7 @@ const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull,GraphQLBoolean
 const ContactType = require('./contact_type');
 const SongType = require('./song_type');
 const LyricType = require('./lyric_type');
-
+const PlatformType = require('./platform_type');
 
 //
 
@@ -18,6 +18,8 @@ const Song = mongoose.model('song');
 const Client = mongoose.model('client');
 const Product = mongoose.model('product');
 const Contact = mongoose.model('contact');
+const Platform = mongoose.model('platform');
+
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -67,6 +69,12 @@ const RootQuery = new GraphQLObjectType({
          return Contact.find({});
       }
 
+    },
+    platforms:{
+      type:  new GraphQLList(PlatformType),
+      resolve(){
+        return Platform.find({});
+      }
     },
     findFlaggedProducts: {
       type: new GraphQLList(ProductType),

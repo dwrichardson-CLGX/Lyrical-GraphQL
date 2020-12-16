@@ -6,12 +6,14 @@ const Lyric = mongoose.model('lyric');
 const Product = mongoose.model('product');
 const Client = mongoose.model('client');
 const Contact = mongoose.model('contact');
+const Platform = mongoose.model('platform');
 
 const SongType = require('./song_type');
 const LyricType = require('./lyric_type');
 const ProductType = require('./product_type');
 const ClientType = require('./client_type');
 const ContactType = require('./contact_type');
+const PlatformType = require('./platform_type');
 
 var Schema = mongoose.Schema; 
 
@@ -51,6 +53,28 @@ const mutation = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parentValue, { id }) {
         return Song.remove({ _id: id });
+      }
+    }, 
+    addPlatform:{
+      type: PlatformType,
+      args:{
+         Name: {type: GraphQLString},
+        Links: {type: GraphQLString},
+        Description: { type: GraphQLString},
+        ContactName: { type: GraphQLString},
+        ContactEmail: { type: GraphQLString},
+        ContactPhone : { type: GraphQLString},        
+        PlatformNotes: { type: graphql.GraphQLString}
+      },
+      resolve(parentValue, { Name, Links,Description, ContactName,ContactEmail,ContactPhone, PlatformNotes}){
+          
+       const filter = {Name: Name}
+       const update =  { Name, Links,Description, ContactName,ContactEmail,ContactPhone, PlatformNotes};
+       
+          return Platform.findOneAndUpdate(filter, update, {
+             new:true,
+             upsert: true
+           });
       }
     },
     addProduct:{

@@ -8,7 +8,13 @@ const PlatformType = new GraphQLObjectType({
     name: 'PlatformType',
     fields: () => ({
         id: { type: GraphQLID},
-        Name: { type: GraphQLString }  
+        Name: { type: GraphQLString }  ,
+        Links: { type: GraphQLString },
+        Description: { type: GraphQLString},
+        ContactName: { type: GraphQLString},
+        ContactEmail: { type: GraphQLString},
+        ContactPhone : { type: GraphQLString}, 
+        PlatformNotes: {type: GraphQLString}
     })
 });
 
