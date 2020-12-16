@@ -3,3 +3,4 @@ require('./lyric');
 require('./client');
 require('./product');
 require('./contact');
+require('./platform');

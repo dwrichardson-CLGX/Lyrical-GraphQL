@@ -35,6 +35,13 @@ const RootQuery = new GraphQLObjectType({
         return Song.findById(id);
       }
     },
+    client:{
+      type: ClientType,
+      args: { id: { type: GraphQLID}},
+      resolve(parentValue, {id}){
+        return Client.findById(id);
+      }
+    },
     lyric: {
       type: LyricType,
       args: { id: { type: new GraphQLNonNull(GraphQLID) } },
@@ -68,6 +75,14 @@ const RootQuery = new GraphQLObjectType({
        return Product.find({ IsFlagged : isFlagged });
       }
     },
+    findIntegrationProducts: {
+      type: new GraphQLList(ProductType),
+      args: { ProductType: { type: graphql.GraphQLInt}},
+      resolve(parentValue, { ProductType }){
+          return Product.find({ ProductType:ProductType });
+      }
+    },
+     
     
     findProductsByClient:{
       type: new GraphQLList(ClientType),

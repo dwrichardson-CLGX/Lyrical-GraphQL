@@ -10,7 +10,8 @@ import SongDetail from './components/SongDetail';
 import AdminManagement from './components/AdminManagement';
 import Support from './components/Support';
 import ClientList from './components/ClientList';
-
+import AddClient from './components/AddClient';
+import EditClient from './components/EditClient';
 
 import { Router, Route, hashHistory, IndexRoute } from "react-router";
 
@@ -29,6 +30,8 @@ const Root = () => {
               <Route path="manage" component={AdminManagement} />
               <Route path="support"  component={Support}  />
               <Route path="clients" component={ClientList} />
+              <Route path="clients/new" component={AddClient} />
+              <Route path="clients/:id" component={EditClient} />
           </Route>
        </Router>
     </ApolloProvider>
@@ -37,5 +40,5 @@ const Root = () => {
 
 ReactDOM.render(
   <Root />,
-  document.querySelector('#root')
+  document.querySelector('#root'),
 );

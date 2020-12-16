@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import query from '../queries/fetchSongs';
+import query from '../queries/fetchClients';
 import { graphql } from 'react-apollo';
+import {Link} from 'react-router';
 
 class ClientList extends Component{
     constructor(props){
@@ -8,16 +9,18 @@ class ClientList extends Component{
     }
 
     renderTable(){
-        if(this.props.data.contacts !== undefined){
-            return this.props.data.songs.map((song) => {
+        if(this.props.data.clients !== undefined){
+            return this.props.data.clients.map((client) => {
                 return (
 
-                    <tr key={song.id}>
-                        <td>{song.title}</td>
-                        <td>{song.artist}</td>
-                        <td></td>
+                    <tr key={client.id}>
+                        <td>{client.PrimaryPlatform}</td>                        
+                        <td>{client.CorelogicContactName}</td>
+                        <td>{ client.ClientContactName}</td>
+                        <td><Link to={`clients/${client.id}`}>
+                           <i className="material-icons edit">edit</i>
+                            </Link></td>
                     </tr>
-             
                 );
             });
             }

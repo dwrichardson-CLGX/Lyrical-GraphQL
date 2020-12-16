@@ -9,7 +9,8 @@ const ProductSchema = new Schema({
     ContactName:  { type:String },
     ContactEmail: { type: String },
     ContactPhone: { type: String },
-    IsFlagged: { type: Boolean }
+    IsFlagged: { type: Boolean },
+    ProductType: { type: Number}
    
   }, {usePushEach: true});
 
