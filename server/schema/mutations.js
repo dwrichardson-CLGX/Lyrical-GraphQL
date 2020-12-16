@@ -63,10 +63,20 @@ const mutation = new GraphQLObjectType({
         ContactEmail: { type: GraphQLString},
         ContactPhone : { type: GraphQLString},
         IsFlagged: { type: GraphQLBoolean},
-        ProductType: { type: graphql.GraphQLInt }
+        ProductType: { type: graphql.GraphQLInt },
+        ProductNotes: { type: graphql.GraphQLString}
       },
-      resolve(parentValue,{ ProductName, Links, Description, ContactName,ContactEmail,ContactPhone, IsFlagged, ProductType}){
-        return (new Product({ ProductName: ProductName, Links: Links, Description: Description, ContactName: ContactName, ContactEmail: ContactEmail, ContactPhone: ContactPhone, IsFlagged: IsFlagged, ProductType: ProductType})).save();
+      resolve(parentValue,{ ProductName, Links, Description, ContactName,ContactEmail,ContactPhone, IsFlagged, ProductType, ProductNotes}){
+       // return (new Product({ ProductName: ProductName, Links: Links, Description: Description, ContactName: ContactName, ContactEmail: ContactEmail, ContactPhone: ContactPhone, IsFlagged: IsFlagged, ProductType: ProductType})).save();
+
+       const filter = {ProductName: ProductName}
+       const update =  { ProductName, Links, Description, ContactName,ContactEmail,ContactPhone, IsFlagged, ProductType, ProductNotes};
+       
+          return Product.findOneAndUpdate(filter, update, {
+             new:true,
+             upsert: true
+           });
+
       }
     },
     addContact:{

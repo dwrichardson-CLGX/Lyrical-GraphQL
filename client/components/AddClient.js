@@ -121,10 +121,9 @@ class AddClient extends Component{
         );
        
         return(
-            <div className="container">
+            <div className="container"> 
                              <form className="col s12" onSubmit={this.onSubmit.bind(this)}>
-                       
-                                
+                        
                                 <div className="row">
                                     {/* <div className="browser-default input-field col s6">
                                     <select>
@@ -141,7 +140,7 @@ class AddClient extends Component{
                                             <div className="input-field col s4">
                                                 <input placeholder="Client Name" id="title" type="text" className="validate" 
                                                         onChange={event => this.setState({ Name: event.target.value })}
-                                                        value={this.state.title}
+                                                        value={this.state.Name}
                                                     ></input>
                                                     <label htmlFor="title" className="active">ClientName</label>
                                                 </div>
@@ -227,6 +226,7 @@ class AddClient extends Component{
                                 </div>
                                 <div className="col s4"> 
                                        <select multiple>
+                                       <option value="" disabled>Choose your option</option>
                                          { optionItems }
                                        </select> 
                                        <label>Products</label>

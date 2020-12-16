@@ -21,7 +21,8 @@ const ProductType = new GraphQLObjectType({
         ContactEmail: { type: GraphQLString},
         ContactPhone : { type: GraphQLString},
         IsFlagged: { type: GraphQLBoolean },
-        ProductType: { type: GraphQLInt}
+        ProductType: { type: GraphQLInt},
+        ProductNotes: {type: GraphQLString}
     //     contact: { type: new GraphQLObjectType({
     //          name:'ContactType',
     //          fields: () => ({

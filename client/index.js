@@ -12,6 +12,8 @@ import Support from './components/Support';
 import ClientList from './components/ClientList';
 import AddClient from './components/AddClient';
 import EditClient from './components/EditClient';
+import AddProduct from  './components/AddProduct';
+
 
 import { Router, Route, hashHistory, IndexRoute } from "react-router";
 
@@ -32,6 +34,7 @@ const Root = () => {
               <Route path="clients" component={ClientList} />
               <Route path="clients/new" component={AddClient} />
               <Route path="clients/:id" component={EditClient} />
+               <Route path="products/new" component={AddProduct} />
           </Route>
        </Router>
     </ApolloProvider>

@@ -3,9 +3,11 @@ import { Link } from 'react-router';
 
 
 export default ({children}) => {
+ 
     return (
         <div>
-       <nav className="nav-extended">
+       <nav className="nav-bar">
+           
         <div className="nav-wrapper">
        <a href="#" className="brand-logo">Logo</a>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
