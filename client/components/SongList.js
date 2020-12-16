@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import gql from  'graphql-tag';
 import { graphql } from 'react-apollo';
 import { Link } from 'react-router';
-import query from '../queries/fetchSongs'
+//import query from '../queries/fetchSongs'
 import deleteQuery from '../queries/deleteSongs';
-
+import M from 'materialize-css';
+import query from '../queries/fetchClients';
 class SongList extends Component {
 
     constructor(props){
         super(props);
+
+        this.state ={
+            showResults: false,
+            curTime : new Date().toLocaleString()
+        }
     }
 
     onSelectSong(id){
@@ -26,6 +32,8 @@ class SongList extends Component {
         .then(() => this.props.data.refetch()); 
       
     } 
+
+
 
     renderSongs(){
         if(this.props.data.songs !== undefined){
@@ -50,37 +58,88 @@ class SongList extends Component {
         });
         }
     }
+
+
+    init(){
+         
+        if(!this.props.data.loading){
+           console.log('init');
+            M.AutoInit();
+
+        }
+    }
+
+
+    renderTable(){
+        if(this.props.data.clients !== undefined){
+            return this.props.data.clients.map((client,i ) => {
+                return (
+
+                    <tr key={client.id}>
+                    <td>{ client.Name}</td>
+                    <td>{client.PrimaryPlatform}</td>       
+                    <td>{ (i % 2 == 0 ? 'Digital Gateway': 'CDNA') }</td>                 
+                    <td>{client.CorelogicContactName}</td>
+                    <td>{ this.state.curTime }</td>
+                  
+                    </tr>
+                );
+            });
+            }
+    }
+
 render(){
 
     return(
+        <div className="container"> 
         <div className="row">
-        
-         <div className="browser-default input-field col s6">
+         <div className="input-field col s6">
           <select id=""> 
-                <option value="0" >Choose your option</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+                <option value="0" >Choose your Platform</option>
+                <option value="1">CMS.NET</option>
+                <option value="2">Legacy</option>
+                <option value="3">Mercury</option>
+                <option value="4">Appraisal Scope</option>
            </select>
-             <label>Search By Company</label>
+             <label className="active">Search By Product</label>
          </div>
          <div className="browser-default input-field col s6">
           <select id=""> 
-                <option value="0" >Choose your option</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-           </select>
-             <label>Search By Product</label>
-         </div>
-         <div className="browser-default input-field col s6">
-          <select id=""> 
-                <option value="0" >Choose your option</option>
+                <option value="0" >Choose your Integration</option>
                 <option value="1">Digital Gateway</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+                <option value="2">CDNA</option>
+                <option value="3">House Canary</option>
            </select>
-             <label>Search By Company</label>
+             <label className="active">Search By Company</label>
+         </div>
+         <div className="row">
+         <div className="col s12 right">
+            <button onClick={event => this.setState({showResults: !this.state.showResults})} >Search</button>
+         </div>
+         </div>
+
+
+         <div className="col s12" id="SearchResults" style={this.state.showResults ? {} : {display:'none'}}>
+         
+                    <table className="table striped">
+                    <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Platform</th>
+                                <th>Integrations</th>
+                                <th>Primary Contact</th>
+                                <th>Last Update</th>
+                                 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            { this.renderTable() }
+                        </tbody>
+                    </table>
+                 
+         </div>
+         {this.init()}
+
          </div>
         </div>
     )

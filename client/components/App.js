@@ -9,7 +9,7 @@ export default ({children}) => {
        <nav className="nav-bar">
            
         <div className="nav-wrapper">
-       <a href="#" className="brand-logo">Logo</a>
+       <a href="#" className="brand-logo">Rapid Impact Assessor </a>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
             <div>
                 <li><Link to="/"  >Search </Link></li>
@@ -21,7 +21,7 @@ export default ({children}) => {
         </ul>
         </div> 
     </nav>   
-    <div className="container">{ children }</div>
+    <div className="container"> <br/>{ children }</div>
     </div>
     );
       
