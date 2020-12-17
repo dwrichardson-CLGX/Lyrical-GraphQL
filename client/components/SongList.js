@@ -101,7 +101,7 @@ render(){
                 <option value="3">Mercury</option>
                 <option value="4">Appraisal Scope</option>
            </select>
-             <label className="active">Search By Product</label>
+             <label className="active">Search By Platform</label>
          </div>
          <div className="browser-default input-field col s6">
           <select id=""> 
@@ -110,7 +110,7 @@ render(){
                 <option value="2">CDNA</option>
                 <option value="3">House Canary</option>
            </select>
-             <label className="active">Search By Company</label>
+             <label className="active">Search By Integration</label>
          </div>
          <div className="row">
          <div className="col s12 right">

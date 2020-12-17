@@ -49,7 +49,7 @@ class ManagePlatform extends Component{
 
     render(){
         console.log('rendered Page')
-        window.location.reload(false);
+        
         return(
             <div className="container">
                   <h1>Manage Platforms</h1>
