@@ -50,7 +50,7 @@ class ManageProduct extends Component{
     render(){
         return(
             <div className="container">
-                  <h1>Manage Application</h1>
+                  <h1>Manage Products</h1>
                   <div className="row">
                    
                       <div className="col s4">

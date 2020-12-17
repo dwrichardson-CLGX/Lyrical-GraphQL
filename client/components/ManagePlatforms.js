@@ -26,6 +26,7 @@ class ManagePlatform extends Component{
     }
 
 
+
     renderTableBody(){
         if(this.props.data.platforms !== undefined){
             return this.props.data.platforms.map((platform,i) => {
@@ -47,9 +48,11 @@ class ManagePlatform extends Component{
 
 
     render(){
+        console.log('rendered Page')
+        window.location.reload(false);
         return(
             <div className="container">
-                  <h1>Manage Application</h1>
+                  <h1>Manage Platforms</h1>
                   <div className="row">
                    
                       <div className="col s4">

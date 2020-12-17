@@ -37,7 +37,7 @@ class AdminManagement extends Component{
     render(){
         return(
             <div className="container">
-                  <h1>Manage Application</h1>
+                 <h1>Manage Clients</h1>
                   <div className="row">
                       <div className="col s4">
                             <Link to="/Clients/new">Manage Clients</Link>
